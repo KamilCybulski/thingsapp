@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "705566932969",
+    "firebase_url": "https://thingsapp-2c458.firebaseio.com",
+    "project_id": "thingsapp-2c458",
+    "storage_bucket": "thingsapp-2c458.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:705566932969:android:f19e7891c973ef721b5578",
+        "android_client_info": {
+          "package_name": "com.thingsapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "705566932969-35b69opamahs3fjgsftsk93mrolsslls.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.thingsapp",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "705566932969-5qbq8d5004skgk6o9f7hfa5f0ibjms94.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIRDQy3xacae_07XzF-hht38olZ_esyIU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "705566932969-5qbq8d5004skgk6o9f7hfa5f0ibjms94.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
