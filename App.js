@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import styled from 'styled-components';
 
 import firebase from '@react-native-firebase/app';
 
@@ -10,26 +10,26 @@ import firebase from '@react-native-firebase/app';
 //    3) import the package here in your JavaScript code: `import '@react-native-firebase/auth';`
 //    4) The Firebase Auth service is now available to use here: `firebase.auth().currentUser`
 
+const MainContainer = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5fcff;
+`;
+
+const WelcomeText = styled.Text`
+  font-size: 20px;
+  text-align: center;
+  color: red;
+  margin: 10px;
+`;
+
 export default class App extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native + Firebase!</Text>
-      </View>
+      <MainContainer>
+        <WelcomeText>Welcome to React Native + Firebase!</WelcomeText>
+      </MainContainer>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-});
