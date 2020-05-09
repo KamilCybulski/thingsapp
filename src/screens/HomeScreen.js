@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import styled from 'styled-components/native';
-import { Text } from 'react-native';
+// import { Text } from 'react-native';
 
 import { SCREENS } from '.';
 import IconButton from '../components/IconButton';
@@ -25,8 +25,15 @@ export const HomeScreen = ({ navigation }) => {
   return (
     <HomeScreenContanier>
       <HomeScreenText>Welcome to HomeScreen</HomeScreenText>
+      {/* <TouchableHighlight onPress={handlePress}>
+        <AddProductButtonContent onPress={handlePress}>
+          <PlusIcon width={20} height={20} fill="#fff" />
+          <HomeScreenText>Add new product</HomeScreenText>
+        </AddProductButtonContent>
+      </TouchableHighlight> */}
+
       <IconButton onPress={handlePress}>
-        <AddIcon />
+        <AddIcon width={30} height={30} fill="#fff" />
       </IconButton>
     </HomeScreenContanier>
   );

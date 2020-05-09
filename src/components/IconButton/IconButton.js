@@ -1,17 +1,22 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
+import { View } from 'react-native';
 
-const RoundButton = styled.TouchableOpacity`
+const ButtonWrapper = styled.View`
+  position: absolute;
   width: 50px;
   height: 50px;
-  border-top-right-radius: 50px;
-  border-top-left-radius: 50px;
-  border-bottom-right-radius: 50px;
-  border-bottom-left-radius: 50px;
+  elevation: 8;
   overflow: hidden;
-  position: absolute;
+  border-radius: 50px;
   bottom: 20px;
+`;
+
+const RoundButton = styled.TouchableOpacity`
+  /* overflow: hidden; */
+  height: 100%;
+  width: 100%;
 `;
 
 const styles = {
@@ -21,17 +26,19 @@ const styles = {
 };
 
 const IconButton = ({ children, onPress }) => (
-  <RoundButton onPress={onPress}>
-    <LinearGradient
-      colors={['#36739D', '#189D91', '#0BC57D']}
-      style={styles}
-      locations={[0.2, 0.6, 1]}
-      start={{ x: 0, y: 0 }}
-      end={{ x: 0.7, y: 1 }}
-    >
-      {children}
-    </LinearGradient>
-  </RoundButton>
+  <ButtonWrapper>
+    <RoundButton onPress={onPress}>
+      <LinearGradient
+        colors={['#6BB4D0', '#37ECBA']}
+        style={styles}
+        locations={[0.2, 1]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 0.7, y: 1 }}
+      >
+        {children}
+      </LinearGradient>
+    </RoundButton>
+  </ButtonWrapper>
 );
 
 export default IconButton;
