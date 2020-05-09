@@ -1,13 +1,16 @@
 import React, { useCallback } from 'react';
 import styled from 'styled-components/native';
-import { Button } from 'react-native';
+import { Text } from 'react-native';
+
 import { SCREENS } from '.';
+import IconButton from '../components/IconButton';
+import AddIcon from '../assets/icons/add--white.svg';
 
 const HomeScreenContanier = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
-  background-color: #006b3c;
+  background-color: #e1e6ea;
 `;
 
 const HomeScreenText = styled.Text`
@@ -22,7 +25,9 @@ export const HomeScreen = ({ navigation }) => {
   return (
     <HomeScreenContanier>
       <HomeScreenText>Welcome to HomeScreen</HomeScreenText>
-      <Button title="Add new product" onPress={handlePress} />
+      <IconButton onPress={handlePress}>
+        <AddIcon />
+      </IconButton>
     </HomeScreenContanier>
   );
 };
