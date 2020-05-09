@@ -3,25 +3,24 @@ import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
 
 const ButtonWrapper = styled.View`
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  elevation: 8;
-  overflow: hidden;
   border-radius: 50px;
   bottom: 20px;
+  elevation: 8;
+  height: 50px;
+  overflow: hidden;
+  position: absolute;
+  width: 50px;
 `;
 
 const RoundButton = styled.TouchableOpacity`
-  /* overflow: hidden; */
   height: 100%;
   width: 100%;
 `;
 
 const styles = {
+  alignItems: 'center',
   flex: 1,
   justifyContent: 'center',
-  alignItems: 'center',
 };
 
 const IconButton = ({ children, onPress }) => (
