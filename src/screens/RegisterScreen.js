@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 
 import { Input, Button, Text, Wrapper } from '../components';
 
-const ScreenWrapper = styled.View`
+const RegisterScreenWrapper = styled.View`
   align-items: center;
   flex: 1;
   justify-content: center;
@@ -20,7 +20,7 @@ export const RegisterScreen = () => {
   const [phoneNumber, updatePhoneNumber] = useState('');
 
   return (
-    <ScreenWrapper>
+    <RegisterScreenWrapper>
       <Heading>Things</Heading>
       <Wrapper mt="50px" mb="20px">
         <Input
@@ -38,6 +38,6 @@ export const RegisterScreen = () => {
       </Wrapper>
       {/* TODO: add link */}
       <Text light>Already have an account? Sign in.</Text>
-    </ScreenWrapper>
+    </RegisterScreenWrapper>
   );
 };
