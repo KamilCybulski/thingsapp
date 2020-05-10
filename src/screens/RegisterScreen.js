@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import { View, Text } from 'react-native';
 
 import Gradient from '../components/Gradient';
 import Logo from '../assets/icons/things-logo.svg';
+import Input from '../components/Input';
 
 const ScreenWrapper = styled.View`
   flex: 1;
@@ -18,8 +19,17 @@ const Heading = styled.Text`
   font-size: 32px;
 `;
 
-export const RegisterScreen = () => (
-  <ScreenWrapper>
-    <Heading>Things</Heading>
-  </ScreenWrapper>
-);
+export const RegisterScreen = () => {
+  const [phoneNumber, updatePhoneNumber] = useState('');
+
+  return (
+    <ScreenWrapper>
+      <Heading>Things</Heading>
+      <Input
+        value={phoneNumber}
+        onChange={updatePhoneNumber}
+        placeholder="Your phone number"
+      />
+    </ScreenWrapper>
+  );
+};
