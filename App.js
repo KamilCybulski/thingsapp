@@ -1,26 +1,38 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { Provider } from 'react-redux';
-
+import { useSelector, useDispatch } from 'react-redux';
+import auth from '@react-native-firebase/auth';
 import '@react-native-firebase/app';
-import '@react-native-firebase/auth';
 
 import { AppScreens } from './src/screens';
-import store from './src/store';
+import { logUserIn, logUserOut } from './src/store/user';
+import { getUserDetails } from './src/helpers';
 
-// TODO(you): import any additional firebase services that you require for your app, e.g for auth:
-//    1) install the npm package: `yarn add @react-native-firebase/auth@alpha` - you do not need to
-//       run linking commands - this happens automatically at build time now
-//    2) rebuild your app via `yarn run run:android` or `yarn run run:ios`
-//    3) import the package here in your JavaScript code: `import '@react-native-firebase/auth';`
-//    4) The Firebase Auth service is now available to use here: `firebase.auth().currentUser`
+const App = () => {
+  const dispatch = useDispatch();
+  const state = useSelector(s => s);
 
-const App = () => (
-  <Provider store={store}>
+  useEffect(() => {
+    const unsubscribe = auth().onAuthStateChanged(user => {
+      if (user) {
+        dispatch(logUserIn(getUserDetails(user)));
+      } else {
+        dispatch(logUserOut());
+      }
+    });
+
+    return unsubscribe;
+  });
+
+  useEffect(() => {
+    console.log(state);
+  }, [state]);
+
+  return (
     <NavigationContainer>
       <AppScreens />
     </NavigationContainer>
-  </Provider>
-);
+  );
+};
 
 export default App;
