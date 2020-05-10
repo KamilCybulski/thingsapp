@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-
+import * as SplashScreen from 'expo-splash-screen';
 import firebase from '@react-native-firebase/app';
+
 import { AppScreens } from './src/screens';
 
 // TODO(you): import any additional firebase services that you require for your app, e.g for auth:
@@ -11,10 +12,16 @@ import { AppScreens } from './src/screens';
 //    3) import the package here in your JavaScript code: `import '@react-native-firebase/auth';`
 //    4) The Firebase Auth service is now available to use here: `firebase.auth().currentUser`
 
-const App = () => (
-  <NavigationContainer>
-    <AppScreens />
-  </NavigationContainer>
-);
+const App = () => {
+  useEffect(() => {
+    SplashScreen.hide();
+  }, []);
+
+  return (
+    <NavigationContainer>
+      <AppScreens />
+    </NavigationContainer>
+  );
+};
 
 export default App;
