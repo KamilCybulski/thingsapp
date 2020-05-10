@@ -1,10 +1,12 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
+import { Provider } from 'react-redux';
 
 import '@react-native-firebase/app';
 import '@react-native-firebase/auth';
 
 import { AppScreens } from './src/screens';
+import store from './src/store';
 
 // TODO(you): import any additional firebase services that you require for your app, e.g for auth:
 //    1) install the npm package: `yarn add @react-native-firebase/auth@alpha` - you do not need to
@@ -14,9 +16,11 @@ import { AppScreens } from './src/screens';
 //    4) The Firebase Auth service is now available to use here: `firebase.auth().currentUser`
 
 const App = () => (
-  <NavigationContainer>
-    <AppScreens />
-  </NavigationContainer>
+  <Provider store={store}>
+    <NavigationContainer>
+      <AppScreens />
+    </NavigationContainer>
+  </Provider>
 );
 
 export default App;
