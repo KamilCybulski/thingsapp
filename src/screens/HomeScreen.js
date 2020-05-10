@@ -2,14 +2,14 @@ import React, { useCallback } from 'react';
 import styled from 'styled-components/native';
 
 import { SCREENS } from '.';
-import IconButton from '../components/IconButton';
+import { IconButton } from '../components';
 import AddIcon from '../assets/icons/add--white.svg';
 
 const HomeScreenContanier = styled.View`
-  flex: 1;
-  justify-content: center;
   align-items: center;
   background-color: #e1e6ea;
+  flex: 1;
+  justify-content: center;
 `;
 
 const HomeScreenText = styled.Text`
