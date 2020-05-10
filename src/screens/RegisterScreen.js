@@ -1,21 +1,18 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/native';
-import { View, Text } from 'react-native';
 
-import Gradient from '../components/Gradient';
-import Logo from '../assets/icons/things-logo.svg';
-import Input from '../components/Input';
+import { Input, Button, Text, Wrapper } from '../components';
 
 const ScreenWrapper = styled.View`
-  flex: 1;
-  padding: 0 10%;
   align-items: center;
+  flex: 1;
   justify-content: center;
+  padding: 0 10%;
 `;
 
 const Heading = styled.Text`
-  font-family: 'Pacifico-Regular';
   color: #36415a;
+  font-family: 'Pacifico-Regular';
   font-size: 32px;
 `;
 
@@ -25,16 +22,22 @@ export const RegisterScreen = () => {
   return (
     <ScreenWrapper>
       <Heading>Things</Heading>
-      <Input
-        value={phoneNumber}
-        onChangeText={updatePhoneNumber}
-        placeholder="Your phone number"
-        autoCompleteType="tel"
-        autoFocus
-        keyboardType="phone-pad"
-        returnKeyType="send"
-        textContentType="telephoneNumber"
-      />
+      <Wrapper mt="50px" mb="20px">
+        <Input
+          value={phoneNumber}
+          onChangeText={updatePhoneNumber}
+          placeholder="Your phone number"
+          autoCompleteType="tel"
+          keyboardType="phone-pad"
+          returnKeyType="send"
+          textContentType="telephoneNumber"
+        />
+      </Wrapper>
+      <Wrapper mb="10px">
+        <Button>Sign up</Button>
+      </Wrapper>
+      {/* TODO: add link */}
+      <Text light>Already have an account? Sign in.</Text>
     </ScreenWrapper>
   );
 };

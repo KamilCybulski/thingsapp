@@ -5,6 +5,7 @@ const styles = {
   alignItems: 'center',
   flex: 1,
   justifyContent: 'center',
+  width: '100%',
 };
 
 const Gradient = ({ children }) => (
