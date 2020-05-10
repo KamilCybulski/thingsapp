@@ -1,7 +1,9 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 
-import firebase from '@react-native-firebase/app';
+import '@react-native-firebase/app';
+import '@react-native-firebase/auth';
+
 import { AppScreens } from './src/screens';
 
 // TODO(you): import any additional firebase services that you require for your app, e.g for auth:
