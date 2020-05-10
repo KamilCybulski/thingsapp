@@ -11,11 +11,12 @@ const StyledInput = styled.TextInput`
   padding: 0 25px;
 `;
 
-const Input = ({ value, placeholder, onChange }) => (
+const Input = ({ value, placeholder, onChangeText, ...rest }) => (
   <StyledInput
     value={value}
     placeholder={placeholder}
-    onChange={e => onChange(e.target.value)}
+    onChangeText={text => onChangeText(text)}
+    {...rest}
   />
 );
 

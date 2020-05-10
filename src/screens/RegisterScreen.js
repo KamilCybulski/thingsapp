@@ -27,8 +27,13 @@ export const RegisterScreen = () => {
       <Heading>Things</Heading>
       <Input
         value={phoneNumber}
-        onChange={updatePhoneNumber}
+        onChangeText={updatePhoneNumber}
         placeholder="Your phone number"
+        autoCompleteType="tel"
+        autoFocus
+        keyboardType="phone-pad"
+        returnKeyType="send"
+        textContentType="telephoneNumber"
       />
     </ScreenWrapper>
   );
