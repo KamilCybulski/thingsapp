@@ -1,13 +1,19 @@
 import { useRef, useCallback } from 'react';
 import auth from '@react-native-firebase/auth';
 
-export const usePhoneSignup = () => {
+const usePhoneAuth = () => {
   const authRef = useRef(null);
 
-  const sendSmsCode = useCallback(async phoneNumber => {
-    const result = await auth().signInWithPhoneNumber(phoneNumber);
-    authRef.current = result;
-  }, []);
+  const sendSmsCode = useCallback(
+    async phoneNumber => {
+      if (!phoneNumber) {
+        throw new Error('Field reqired');
+      }
+      const result = await auth().signInWithPhoneNumber(phoneNumber);
+      authRef.current = result;
+    },
+    [authRef],
+  );
 
   const confirmSmsCode = useCallback(
     async code => {
@@ -24,3 +30,5 @@ export const usePhoneSignup = () => {
 
   return { sendSmsCode, confirmSmsCode };
 };
+
+export default usePhoneAuth;

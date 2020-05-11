@@ -1,26 +1,28 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import { RegisterScreen } from './RegisterScreen';
-import { HomeScreen } from './HomeScreen';
-import { AddThingScreen } from './AddThingScreen';
+import AuthScreen from './AuthScreen';
+import HomeScreen from './HomeScreen';
+import AddThingScreen from './AddThingScreen';
 
 const Stack = createStackNavigator();
 
 export const SCREENS = {
-  register: 'Register',
+  auth: 'Auth',
   home: 'Home',
   addThing: 'AddThing',
 };
 
-export const AppScreens = () => (
-  <Stack.Navigator initialRouteName={SCREENS.register}>
+const AppScreens = () => (
+  <Stack.Navigator initialRouteName={SCREENS.auth}>
     <Stack.Screen
-      name={SCREENS.register}
-      component={RegisterScreen}
+      name={SCREENS.auth}
+      component={AuthScreen}
       options={{ headerShown: false }}
     />
     <Stack.Screen name={SCREENS.home} component={HomeScreen} />
     <Stack.Screen name={SCREENS.addThing} component={AddThingScreen} />
   </Stack.Navigator>
 );
+
+export default AppScreens;

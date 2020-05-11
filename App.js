@@ -4,13 +4,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import auth from '@react-native-firebase/auth';
 import '@react-native-firebase/app';
 
-import { AppScreens } from './src/screens';
+import AppScreens from './src/screens';
 import { logUserIn, logUserOut } from './src/store/user';
 import { getUserDetails } from './src/helpers';
 
 const App = () => {
   const dispatch = useDispatch();
-  const state = useSelector(s => s);
+  const state = useSelector(s => s.user);
 
   useEffect(() => {
     const unsubscribe = auth().onAuthStateChanged(user => {
@@ -22,7 +22,8 @@ const App = () => {
     });
 
     return unsubscribe;
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     console.log(state);

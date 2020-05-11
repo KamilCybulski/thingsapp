@@ -16,7 +16,7 @@ const HomeScreenText = styled.Text`
   color: #fff;
 `;
 
-export const HomeScreen = ({ navigation }) => {
+const HomeScreen = ({ navigation }) => {
   const handlePress = useCallback(() => {
     navigation.navigate(SCREENS.addThing);
   }, [navigation]);
@@ -30,3 +30,5 @@ export const HomeScreen = ({ navigation }) => {
     </HomeScreenContanier>
   );
 };
+
+export default HomeScreen;
