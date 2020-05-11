@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components/native';
 import * as yup from 'yup';
 
-import { Input, Button, Wrapper } from '..';
+import { Input, Button, Wrapper, AppTitle } from '..';
 import { Formik } from 'formik';
 
 const PhoneNumberFormWrapper = styled.View`
@@ -10,12 +10,6 @@ const PhoneNumberFormWrapper = styled.View`
   flex: 1;
   justify-content: center;
   padding: 0 10%;
-`;
-
-const Heading = styled.Text`
-  color: #36415a;
-  font-family: 'Pacifico-Regular';
-  font-size: 32px;
 `;
 
 const Error = styled.Text`
@@ -32,7 +26,7 @@ const validationSchema = yup.object().shape({
 
 const PhoneNumberForm = ({ onSubmit, error }) => (
   <PhoneNumberFormWrapper>
-    <Heading>Things</Heading>
+    <AppTitle />
     <Formik
       initialValues={initialValues}
       onSubmit={onSubmit}

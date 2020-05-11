@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/native';
 
-import { Input, Button, Wrapper } from '..';
+import { Input, Button, Wrapper, AppTitle } from '..';
 
 const AuthConfirmationFormWrapper = styled.View`
   align-items: center;
@@ -14,18 +14,12 @@ const Error = styled.Text`
   color: #f00;
 `;
 
-const Heading = styled.Text`
-  color: #36415a;
-  font-family: 'Pacifico-Regular';
-  font-size: 32px;
-`;
-
 const AuthConfirmationForm = ({ onSubmit, error }) => {
   const [code, setCode] = useState('');
 
   return (
     <AuthConfirmationFormWrapper>
-      <Heading>Things</Heading>
+      <AppTitle />
       <Wrapper mt="50px" mb="20px">
         <Input
           value={code}
