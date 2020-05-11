@@ -3,6 +3,8 @@ const initialState = {
   details: null,
 };
 
+export * from './selectors';
+
 export const logUserIn = userDetails => ({
   type: 'LOG_IN',
   payload: userDetails,

@@ -1,16 +1,22 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux';
 import auth from '@react-native-firebase/auth';
 import '@react-native-firebase/app';
 
-import AppScreens from './src/screens';
-import { logUserIn, logUserOut } from './src/store/user';
+import AppScreens, { SCREENS } from './src/screens';
 import { getUserDetails } from './src/helpers';
+import {
+  logUserIn,
+  logUserOut,
+  isUserLoggedInSelector,
+} from './src/store/user';
+import SplashScreen from './src/screens/SplashScreen';
 
 const App = () => {
   const dispatch = useDispatch();
-  const state = useSelector(s => s.user);
+  const userLoggedIn = useSelector(isUserLoggedInSelector);
+  const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
     const unsubscribe = auth().onAuthStateChanged(user => {
@@ -19,19 +25,25 @@ const App = () => {
       } else {
         dispatch(logUserOut());
       }
+
+      if (!isInitialized) {
+        setIsInitialized(true);
+      }
     });
 
     return unsubscribe;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    console.log(state);
-  }, [state]);
+  if (!isInitialized) {
+    return <SplashScreen />;
+  }
 
   return (
     <NavigationContainer>
-      <AppScreens />
+      <AppScreens
+        initialRouteName={userLoggedIn ? SCREENS.home : SCREENS.auth}
+      />
     </NavigationContainer>
   );
 };

@@ -13,8 +13,8 @@ export const SCREENS = {
   addThing: 'AddThing',
 };
 
-const AppScreens = () => (
-  <Stack.Navigator initialRouteName={SCREENS.auth}>
+const AppScreens = ({ initialRouteName }) => (
+  <Stack.Navigator initialRouteName={initialRouteName}>
     <Stack.Screen
       name={SCREENS.auth}
       component={AuthScreen}
