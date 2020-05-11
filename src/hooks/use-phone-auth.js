@@ -22,7 +22,7 @@ const usePhoneAuth = () => {
           'Error: attempted sms code confirmation with out sending sms code',
         );
       } else {
-        authRef.current.confirm(code);
+        await authRef.current.confirm(code);
       }
     },
     [authRef],
