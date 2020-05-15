@@ -19,7 +19,7 @@ const StyledText = styled.Text`
 `;
 
 const Button = ({ children, onPress }) => (
-  <StyledButton>
+  <StyledButton onPress={onPress}>
     <Gradient>
       <StyledText>{children}</StyledText>
     </Gradient>

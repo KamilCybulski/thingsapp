@@ -12,8 +12,10 @@ const AddThingScreenText = styled.Text`
   color: #fff;
 `;
 
-export const AddThingScreen = ({ navigation }) => (
+const AddThingScreen = ({ navigation }) => (
   <AddThingScreenContanier>
     <AddThingScreenText>Welcome to AddThingScreen</AddThingScreenText>
   </AddThingScreenContanier>
 );
+
+export default AddThingScreen;

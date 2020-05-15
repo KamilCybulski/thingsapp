@@ -1,20 +1,51 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
+import { useSelector, useDispatch } from 'react-redux';
+import auth from '@react-native-firebase/auth';
+import '@react-native-firebase/app';
 
-import firebase from '@react-native-firebase/app';
-import { AppScreens } from './src/screens';
+import AppScreens, { SCREENS } from './src/screens';
+import { getUserDetails } from './src/helpers';
+import {
+  logUserIn,
+  logUserOut,
+  isUserLoggedInSelector,
+} from './src/store/user';
+import SplashScreen from './src/screens/SplashScreen';
 
-// TODO(you): import any additional firebase services that you require for your app, e.g for auth:
-//    1) install the npm package: `yarn add @react-native-firebase/auth@alpha` - you do not need to
-//       run linking commands - this happens automatically at build time now
-//    2) rebuild your app via `yarn run run:android` or `yarn run run:ios`
-//    3) import the package here in your JavaScript code: `import '@react-native-firebase/auth';`
-//    4) The Firebase Auth service is now available to use here: `firebase.auth().currentUser`
+const App = () => {
+  const dispatch = useDispatch();
+  const userLoggedIn = useSelector(isUserLoggedInSelector);
+  const [isInitialized, setIsInitialized] = useState(false);
 
-const App = () => (
-  <NavigationContainer>
-    <AppScreens />
-  </NavigationContainer>
-);
+  useEffect(() => {
+    const unsubscribe = auth().onAuthStateChanged(user => {
+      if (user) {
+        dispatch(logUserIn(getUserDetails(user)));
+      } else {
+        dispatch(logUserOut());
+      }
+
+      if (!isInitialized) {
+        setIsInitialized(true);
+      }
+    });
+
+    return unsubscribe;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  if (!isInitialized) {
+    return <SplashScreen />;
+  }
+
+  return (
+    <NavigationContainer>
+      <AppScreens
+        initialRouteName={userLoggedIn ? SCREENS.home : SCREENS.auth}
+      />
+    </NavigationContainer>
+  );
+};
 
 export default App;
