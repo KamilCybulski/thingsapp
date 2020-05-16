@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { usePhoneAuth } from '../hooks';
-import { useCallback } from 'react';
 import { SCREENS } from '.';
 import { AuthConfirmationForm, PhoneNumberForm } from '../components';
+import { addNotification } from '../store/notifications';
 
 const AuthScreen = ({ navigation }) => {
+  const dispatch = useDispatch();
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [error, setError] = useState(null);
   const { sendSmsCode, confirmSmsCode } = usePhoneAuth();
@@ -40,12 +42,15 @@ const AuthScreen = ({ navigation }) => {
       } catch (err) {
         if (err.message.includes('invalid-phone-number')) {
           setError('Invalid phone number');
+          dispatch(
+            addNotification({ type: 'error', message: 'Invalid phone number' }),
+          );
         } else {
           setError(err.message);
         }
       }
     },
-    [sendSmsCode, setError, setShowConfirmation],
+    [sendSmsCode, setError, setShowConfirmation, dispatch],
   );
 
   return showConfirmation ? (
