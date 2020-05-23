@@ -12,6 +12,9 @@ export const removeNotification = id => ({
   payload: id,
 });
 
+export const addErrorNotification = message =>
+  addNotification({ type: 'Error', message });
+
 export const notificationsReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'ADD_NOTIFICATION':

@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import { NavigationContainer } from '@react-navigation/native';
 import '@react-native-firebase/app';
 
@@ -8,6 +9,10 @@ import useAuthState from './src/hooks/useAuthState';
 
 import { NotificationsController } from './src/components';
 
+const AppWrapper = styled.View`
+  flex: 1;
+`;
+
 const App = () => {
   const { authInitialized } = useAuthState();
 
@@ -16,12 +21,12 @@ const App = () => {
   }
 
   return (
-    <>
-      <NotificationsController />
+    <AppWrapper>
       <NavigationContainer>
         <AppScreens />
       </NavigationContainer>
-    </>
+      <NotificationsController />
+    </AppWrapper>
   );
 };
 

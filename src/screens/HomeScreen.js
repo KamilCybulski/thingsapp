@@ -7,7 +7,6 @@ import AddIcon from '../assets/icons/add--white.svg';
 
 const HomeScreenContanier = styled.View`
   align-items: center;
-  background-color: #e1e6ea;
   flex: 1;
   justify-content: center;
 `;
