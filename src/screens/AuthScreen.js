@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { usePhoneAuth } from '../hooks';
 import { SCREENS } from '.';
 import { AuthConfirmationForm, PhoneNumberForm } from '../components';
-import { addNotification } from '../store/notifications';
+import { addErrorNotification } from '../store/notifications';
 
 const AuthScreen = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -19,14 +19,9 @@ const AuthScreen = ({ navigation }) => {
         navigation.navigate(SCREENS.home);
       } catch (err) {
         if (err.message.includes('invalid-verification-code')) {
-          dispatch(
-            addNotification({
-              type: 'error',
-              message: 'Invalid verification code',
-            }),
-          );
+          dispatch(addErrorNotification('Invalid verification code'));
         } else {
-          dispatch(addNotification({ type: 'error', message: err.message }));
+          dispatch(addErrorNotification(err.message));
         }
       }
     },
@@ -41,11 +36,9 @@ const AuthScreen = ({ navigation }) => {
         setShowConfirmation(true);
       } catch (err) {
         if (err.message.includes('invalid-phone-number')) {
-          dispatch(
-            addNotification({ type: 'error', message: 'Invalid phone number' }),
-          );
+          dispatch(addErrorNotification('Invalid phone number'));
         } else {
-          dispatch(addNotification({ type: 'error', message: err.message }));
+          dispatch(addErrorNotification(err.message));
         }
       }
     },

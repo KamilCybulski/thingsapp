@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
 import { NavigationContainer } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux';
 import auth from '@react-native-firebase/auth';
@@ -14,6 +15,10 @@ import {
 import SplashScreen from './src/screens/SplashScreen';
 
 import { NotificationsController } from './src/components';
+
+const AppWrapper = styled.View`
+  flex: 1;
+`;
 
 const App = () => {
   const dispatch = useDispatch();
@@ -44,14 +49,14 @@ const App = () => {
   }
 
   return (
-    <>
-      <NotificationsController />
+    <AppWrapper>
       <NavigationContainer>
         <AppScreens
           initialRouteName={userLoggedIn ? SCREENS.home : SCREENS.auth}
         />
       </NavigationContainer>
-    </>
+      <NotificationsController />
+    </AppWrapper>
   );
 };
 
