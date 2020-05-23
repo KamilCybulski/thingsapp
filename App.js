@@ -1,45 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { useSelector, useDispatch } from 'react-redux';
-import auth from '@react-native-firebase/auth';
 import '@react-native-firebase/app';
 
-import AppScreens, { SCREENS } from './src/screens';
-import { getUserDetails } from './src/helpers';
-import {
-  logUserIn,
-  logUserOut,
-  isUserLoggedInSelector,
-} from './src/store/user';
+import AppScreens from './src/screens';
 import SplashScreen from './src/screens/SplashScreen';
+import useAuthState from './src/hooks/useAuthState';
 
 import { NotificationsController } from './src/components';
 
 const App = () => {
-  const dispatch = useDispatch();
-  const { userLoggedIn } = useSelector(state => ({
-    userLoggedIn: isUserLoggedInSelector(state),
-  }));
-  const [isInitialized, setIsInitialized] = useState(false);
+  const { authInitialized } = useAuthState();
 
-  useEffect(() => {
-    const unsubscribe = auth().onAuthStateChanged(user => {
-      if (user) {
-        dispatch(logUserIn(getUserDetails(user)));
-      } else {
-        dispatch(logUserOut());
-      }
-
-      if (!isInitialized) {
-        setIsInitialized(true);
-      }
-    });
-
-    return unsubscribe;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  if (!isInitialized) {
+  if (!authInitialized) {
     return <SplashScreen />;
   }
 
@@ -47,9 +19,7 @@ const App = () => {
     <>
       <NotificationsController />
       <NavigationContainer>
-        <AppScreens
-          initialRouteName={userLoggedIn ? SCREENS.home : SCREENS.auth}
-        />
+        <AppScreens />
       </NavigationContainer>
     </>
   );
