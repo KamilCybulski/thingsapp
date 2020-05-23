@@ -6,6 +6,8 @@ import AppScreens from './src/screens';
 import SplashScreen from './src/screens/SplashScreen';
 import useAuthState from './src/hooks/useAuthState';
 
+import { NotificationsController } from './src/components';
+
 const App = () => {
   const { authInitialized } = useAuthState();
 
@@ -14,9 +16,12 @@ const App = () => {
   }
 
   return (
-    <NavigationContainer>
-      <AppScreens />
-    </NavigationContainer>
+    <>
+      <NotificationsController />
+      <NavigationContainer>
+        <AppScreens />
+      </NavigationContainer>
+    </>
   );
 };
 
