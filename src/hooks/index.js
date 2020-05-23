@@ -1,1 +1,1 @@
-export { default as usePhoneAuth } from './use-phone-auth';
+export { default as usePhoneAuth } from './usePhoneAuth';
