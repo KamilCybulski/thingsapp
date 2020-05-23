@@ -17,18 +17,15 @@ const NotificationsController = () => {
 
   return (
     <>
-      {notifications &&
-        notifications.map((notification, i) => (
-          <View key={i}>
-            <Text>{notification.type}:</Text>
-            <Text>{notification.message}</Text>
-            <Button
-              onPress={() => dispatch(removeNotification(notification.id))}
-            >
-              Delete
-            </Button>
-          </View>
-        ))}
+      {notifications.map(notification => (
+        <View key={notification.id}>
+          <Text>{notification.type}:</Text>
+          <Text>{notification.message}</Text>
+          <Button onPress={() => dispatch(removeNotification(notification.id))}>
+            Delete
+          </Button>
+        </View>
+      ))}
     </>
   );
 };

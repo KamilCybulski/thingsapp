@@ -9,32 +9,32 @@ import { addNotification } from '../store/notifications';
 const AuthScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   const [showConfirmation, setShowConfirmation] = useState(false);
-  const [error, setError] = useState(null);
   const { sendSmsCode, confirmSmsCode } = usePhoneAuth();
 
   const handleConfirmationFormSubmit = useCallback(
     async values => {
-      setError(null);
-
       const { code } = values;
       try {
         await confirmSmsCode(code);
         navigation.navigate(SCREENS.home);
       } catch (err) {
         if (err.message.includes('invalid-verification-code')) {
-          setError('Invalid verification code');
+          dispatch(
+            addNotification({
+              type: 'error',
+              message: 'Invalid verification code',
+            }),
+          );
         } else {
-          setError(err.message);
+          dispatch(addNotification({ type: 'error', message: err.message }));
         }
       }
     },
-    [navigation, confirmSmsCode],
+    [navigation, confirmSmsCode, dispatch],
   );
 
   const handlePhoneFormsubmit = useCallback(
     async values => {
-      setError(null);
-
       const { phoneNumber } = values;
       try {
         await sendSmsCode(phoneNumber);
@@ -45,20 +45,17 @@ const AuthScreen = ({ navigation }) => {
             addNotification({ type: 'error', message: 'Invalid phone number' }),
           );
         } else {
-          setError(err.message);
+          dispatch(addNotification({ type: 'error', message: err.message }));
         }
       }
     },
-    [sendSmsCode, setError, setShowConfirmation, dispatch],
+    [sendSmsCode, setShowConfirmation, dispatch],
   );
 
   return showConfirmation ? (
-    <AuthConfirmationForm
-      onSubmit={handleConfirmationFormSubmit}
-      error={error}
-    />
+    <AuthConfirmationForm onSubmit={handleConfirmationFormSubmit} />
   ) : (
-    <PhoneNumberForm onSubmit={handlePhoneFormsubmit} error={error} />
+    <PhoneNumberForm onSubmit={handlePhoneFormsubmit} />
   );
 };
 
