@@ -10,11 +10,7 @@ const AuthConfirmationFormWrapper = styled.View`
   padding: 0 10%;
 `;
 
-const Error = styled.Text`
-  color: #f00;
-`;
-
-const AuthConfirmationForm = ({ onSubmit, error }) => {
+const AuthConfirmationForm = ({ onSubmit }) => {
   const [code, setCode] = useState('');
 
   return (
@@ -34,7 +30,6 @@ const AuthConfirmationForm = ({ onSubmit, error }) => {
       <Wrapper mb="10px">
         <Button onPress={() => onSubmit({ code })}>Confirm</Button>
       </Wrapper>
-      {error && <Error>{error}</Error>}
     </AuthConfirmationFormWrapper>
   );
 };

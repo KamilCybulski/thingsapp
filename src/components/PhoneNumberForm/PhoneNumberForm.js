@@ -1,19 +1,15 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import * as yup from 'yup';
+import { Formik } from 'formik';
 
 import { Input, Button, Wrapper, AppTitle } from '..';
-import { Formik } from 'formik';
 
 const PhoneNumberFormWrapper = styled.View`
   align-items: center;
   flex: 1;
   justify-content: center;
   padding: 0 10%;
-`;
-
-const Error = styled.Text`
-  color: #f00;
 `;
 
 const initialValues = {
@@ -24,7 +20,7 @@ const validationSchema = yup.object().shape({
   phoneNumber: yup.string().required('This field is required'),
 });
 
-const PhoneNumberForm = ({ onSubmit, error }) => (
+const PhoneNumberForm = ({ onSubmit }) => (
   <PhoneNumberFormWrapper>
     <AppTitle />
     <Formik
@@ -60,7 +56,6 @@ const PhoneNumberForm = ({ onSubmit, error }) => (
         </>
       )}
     </Formik>
-    {error && <Error>{error}</Error>}
   </PhoneNumberFormWrapper>
 );
 

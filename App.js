@@ -13,9 +13,13 @@ import {
 } from './src/store/user';
 import SplashScreen from './src/screens/SplashScreen';
 
+import { NotificationsController } from './src/components';
+
 const App = () => {
   const dispatch = useDispatch();
-  const userLoggedIn = useSelector(isUserLoggedInSelector);
+  const { userLoggedIn } = useSelector(state => ({
+    userLoggedIn: isUserLoggedInSelector(state),
+  }));
   const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
@@ -40,11 +44,14 @@ const App = () => {
   }
 
   return (
-    <NavigationContainer>
-      <AppScreens
-        initialRouteName={userLoggedIn ? SCREENS.home : SCREENS.auth}
-      />
-    </NavigationContainer>
+    <>
+      <NotificationsController />
+      <NavigationContainer>
+        <AppScreens
+          initialRouteName={userLoggedIn ? SCREENS.home : SCREENS.auth}
+        />
+      </NavigationContainer>
+    </>
   );
 };
 
