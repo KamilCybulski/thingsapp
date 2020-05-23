@@ -41,7 +41,6 @@ const AuthScreen = ({ navigation }) => {
         setShowConfirmation(true);
       } catch (err) {
         if (err.message.includes('invalid-phone-number')) {
-          setError('Invalid phone number');
           dispatch(
             addNotification({ type: 'error', message: 'Invalid phone number' }),
           );

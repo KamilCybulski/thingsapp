@@ -15,9 +15,7 @@ export const removeNotification = id => ({
 export const notificationsReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'ADD_NOTIFICATION':
-      const newPayload = [{ ...action.payload, id: getUniqueId() }];
-      const newNotifications = state.concat(newPayload);
-      return newNotifications;
+      return [...state, { ...action.payload, id: getUniqueId() }];
     case 'REMOVE_NOTIFICATION':
       return state.filter(notification => notification.id !== action.payload);
     default:

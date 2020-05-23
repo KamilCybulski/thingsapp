@@ -24,46 +24,44 @@ const validationSchema = yup.object().shape({
   phoneNumber: yup.string().required('This field is required'),
 });
 
-const PhoneNumberForm = ({ onSubmit, error }) => {
-  return (
-    <PhoneNumberFormWrapper>
-      <AppTitle />
-      <Formik
-        initialValues={initialValues}
-        onSubmit={onSubmit}
-        validationSchema={validationSchema}
-      >
-        {({
-          handleSubmit,
-          handleBlur,
-          handleChange,
-          values,
-          errors,
-          touched,
-        }) => (
-          <>
-            <Wrapper mt="50px" mb="20px">
-              <Input
-                value={values.phoneNumber}
-                onChangeText={handleChange('phoneNumber')}
-                onBlur={handleBlur('phoneNumber')}
-                error={touched.phoneNumber && errors.phoneNumber}
-                placeholder="Your phone number"
-                autoCompleteType="tel"
-                keyboardType="phone-pad"
-                returnKeyType="send"
-                textContentType="telephoneNumber"
-              />
-            </Wrapper>
-            <Wrapper mb="10px">
-              <Button onPress={handleSubmit}>Send</Button>
-            </Wrapper>
-          </>
-        )}
-      </Formik>
-      {error && <Error>{error}</Error>}
-    </PhoneNumberFormWrapper>
-  );
-};
+const PhoneNumberForm = ({ onSubmit, error }) => (
+  <PhoneNumberFormWrapper>
+    <AppTitle />
+    <Formik
+      initialValues={initialValues}
+      onSubmit={onSubmit}
+      validationSchema={validationSchema}
+    >
+      {({
+        handleSubmit,
+        handleBlur,
+        handleChange,
+        values,
+        errors,
+        touched,
+      }) => (
+        <>
+          <Wrapper mt="50px" mb="20px">
+            <Input
+              value={values.phoneNumber}
+              onChangeText={handleChange('phoneNumber')}
+              onBlur={handleBlur('phoneNumber')}
+              error={touched.phoneNumber && errors.phoneNumber}
+              placeholder="Your phone number"
+              autoCompleteType="tel"
+              keyboardType="phone-pad"
+              returnKeyType="send"
+              textContentType="telephoneNumber"
+            />
+          </Wrapper>
+          <Wrapper mb="10px">
+            <Button onPress={handleSubmit}>Send</Button>
+          </Wrapper>
+        </>
+      )}
+    </Formik>
+    {error && <Error>{error}</Error>}
+  </PhoneNumberFormWrapper>
+);
 
 export default PhoneNumberForm;
