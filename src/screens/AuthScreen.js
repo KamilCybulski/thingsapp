@@ -6,7 +6,7 @@ import { SCREENS } from '.';
 import { AuthConfirmationForm, PhoneNumberForm } from '../components';
 import { addErrorNotification } from '../store/notifications';
 
-const AuthScreen = ({ navigation }) => {
+const AuthScreen = () => {
   const dispatch = useDispatch();
   const [showConfirmation, setShowConfirmation] = useState(false);
   const { sendSmsCode, confirmSmsCode } = usePhoneAuth();
@@ -16,7 +16,6 @@ const AuthScreen = ({ navigation }) => {
       const { code } = values;
       try {
         await confirmSmsCode(code);
-        navigation.navigate(SCREENS.home);
       } catch (err) {
         if (err.message.includes('invalid-verification-code')) {
           dispatch(addErrorNotification('Invalid verification code'));
@@ -25,7 +24,7 @@ const AuthScreen = ({ navigation }) => {
         }
       }
     },
-    [navigation, confirmSmsCode, dispatch],
+    [confirmSmsCode, dispatch],
   );
 
   const handlePhoneFormsubmit = useCallback(
