@@ -9,8 +9,8 @@ exports.createUser = functions.auth.user().onCreate(user => {
   return admin
     .firestore()
     .collection('users')
-    .add({
-      uid,
+    .doc(uid)
+    .set({
       phoneNumber,
       fridges: [],
     });
