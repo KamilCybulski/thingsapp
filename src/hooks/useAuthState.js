@@ -3,16 +3,22 @@ import auth from '@react-native-firebase/auth';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { logUserIn, logUserOut } from '../store/user';
-import { getUserDetails } from '../helpers';
+import { userService } from '../services';
 
 const useAuthState = () => {
   const [isInitialized, setIsInitialized] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const unsubscribe = auth().onAuthStateChanged(user => {
-      if (user) {
-        dispatch(logUserIn(getUserDetails(user)));
+    const unsubscribe = auth().onAuthStateChanged(async userRef => {
+      if (userRef) {
+        try {
+          const user = await userService.getUser(userRef.uid);
+          dispatch(logUserIn(user));
+        } catch (err) {
+          console.log(err);
+          // noop
+        }
       } else {
         dispatch(logUserOut());
       }
