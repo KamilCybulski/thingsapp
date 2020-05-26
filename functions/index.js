@@ -3,38 +3,21 @@ const admin = require('firebase-admin');
 
 admin.initializeApp();
 
-const createUser = user => {
-  const { phoneNumber, uid } = user;
-
-  return admin
-    .firestore()
-    .collection('users')
-    .doc(uid)
-    .set({
-      phoneNumber,
-      ownStorages: [],
-      accessibleStorages: [],
-    });
-};
-
-const createStorage = async (data, context) => {
-  // const { uid } = context.auth;
-  const uid = 'zenon';
-
+const createStorage = async (storageName, userId) => {
   const storageRef = await admin
     .firestore()
     .collection('storages')
     .add({
-      owner: uid,
+      owner: userId,
       participants: [],
-      name: data,
+      name: storageName,
       items: [],
     });
 
   await admin
     .firestore()
     .collection('users')
-    .doc(uid)
+    .doc(userId)
     .update(
       'ownStorages',
       admin.firestore.FieldValue.arrayUnion(storageRef.id),
@@ -44,5 +27,23 @@ const createStorage = async (data, context) => {
   return result.data();
 };
 
+const createUser = async user => {
+  const { phoneNumber, uid } = user;
+
+  await admin
+    .firestore()
+    .collection('users')
+    .doc(uid)
+    .set({
+      phoneNumber,
+      ownStorages: [],
+      accessibleStorages: [],
+    });
+
+  await createStorage('My storage', uid);
+};
+
 exports.createUser = functions.auth.user().onCreate(createUser);
-exports.createStorage = functions.https.onCall(createStorage);
+exports.createStorage = functions.https.onCall((data, context) =>
+  createStorage(data, context.auth.uid),
+);
