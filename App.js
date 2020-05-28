@@ -5,7 +5,7 @@ import '@react-native-firebase/app';
 
 import AppScreens from './src/screens';
 import SplashScreen from './src/screens/SplashScreen';
-import useAuthState from './src/hooks/useAuthState';
+import { useAuthState } from './src/hooks';
 
 import { NotificationsController } from './src/components';
 
