@@ -1,13 +1,11 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import styled from 'styled-components/native';
 import { FlatList } from 'react-native';
 
 import { SCREENS } from '.';
 import { IconButton } from '../components';
 import AddIcon from '../assets/icons/add--white.svg';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { storageService } from '../services';
+import { useOwnStorages } from '../hooks';
 
 const HomeScreenContanier = styled.View`
   align-items: center;
@@ -27,23 +25,21 @@ const Item = styled.Text`
 `;
 
 const HomeScreen = ({ navigation }) => {
-  const [ownStorages, setOwnStorages] = useState([]);
+  const { ownStorages } = useOwnStorages();
 
   const handlePress = useCallback(() => {
     navigation.navigate(SCREENS.addThing);
   }, [navigation]);
 
-  useEffect(() => {
-    storageService.getOwnStorages().then(setOwnStorages);
-  }, []);
-
   return (
     <HomeScreenContanier>
       <HomeScreenText>Welcome to HomeScreen</HomeScreenText>
-      <FlatList
-        data={ownStorages}
-        renderItem={({ item }) => <Item key={item.id}>- {item.name}</Item>}
-      />
+      {ownStorages?.length > 0 && (
+        <FlatList
+          data={ownStorages}
+          renderItem={({ item }) => <Item key={item.id}>- {item.name}</Item>}
+        />
+      )}
       <IconButton onPress={handlePress}>
         <AddIcon width={30} height={30} fill="#fff" />
       </IconButton>
