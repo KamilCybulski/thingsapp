@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { storageService } from '../services';
 import { setOwnStorages } from '../store/storages';
@@ -19,7 +19,11 @@ const useOwnStorages = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return { ownStorages, isLoading, error };
+  const ownStoragesList = useMemo(() => Object.values(ownStorages), [
+    ownStorages,
+  ]);
+
+  return { ownStorages, ownStoragesList, isLoading, error };
 };
 
 export default useOwnStorages;

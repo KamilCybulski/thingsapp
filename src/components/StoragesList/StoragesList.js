@@ -26,7 +26,7 @@ const Item = ({ onPress, children }) => (
 
 const StoragesList = () => {
   const navigation = useNavigation();
-  const { ownStorages, isLoading } = useOwnStorages();
+  const { ownStoragesList, isLoading } = useOwnStorages();
 
   const handleItemPress = useCallback(
     storageId => () => {
@@ -39,7 +39,7 @@ const StoragesList = () => {
     return null;
   }
 
-  if (ownStorages?.length <= 0) {
+  if (ownStoragesList?.length <= 0) {
     return (
       <Text>Hey, looks like you don't have any storages yet. Add one!</Text>
     );
@@ -47,7 +47,7 @@ const StoragesList = () => {
 
   return (
     <FlatList
-      data={ownStorages}
+      data={ownStoragesList}
       renderItem={({ item }) => (
         <Item key={item.id} onPress={handleItemPress(item.id)}>
           - {item.name}

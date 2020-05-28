@@ -14,15 +14,13 @@ const StorageScreenHeader = styled.Text`
 
 const StorageScreen = ({ route }) => {
   const { storageId } = route.params;
-  const storage = useSelector(state =>
-    state.storages.own.find(item => item.id === storageId),
-  );
+  const storage = useSelector(state => state.storages.own[storageId]);
 
   console.log('PICKED STORAGE: ', storage);
 
   return (
     <StorageScreenContainer>
-      <StorageScreenHeader>This is storage screen</StorageScreenHeader>
+      <StorageScreenHeader>This is {storage.name} storage</StorageScreenHeader>
     </StorageScreenContainer>
   );
 };
