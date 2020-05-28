@@ -10,9 +10,9 @@ const storageService = {
       .where('owner', '==', uid)
       .get()
       .then(querySnapshot => {
-        let result = [];
+        let result = {};
         querySnapshot.forEach(doc => {
-          result.push({ ...doc.data(), id: doc.id });
+          result[doc.id] = { ...doc.data(), id: doc.id };
         });
         return result;
       });

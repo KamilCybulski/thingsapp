@@ -5,8 +5,8 @@ const TYPES = {
 };
 
 const INITIAL_STATE = {
-  own: [],
-  accessible: [],
+  own: {},
+  accessible: {},
 };
 
 export const setOwnStorages = storages => ({
