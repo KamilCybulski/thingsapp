@@ -8,3 +8,4 @@ export { default as NotificationsController } from './NotificationsController';
 export { default as PhoneNumberForm } from './PhoneNumberForm';
 export { default as Text } from './Text';
 export { default as Wrapper } from './Wrapper';
+export { default as StoragesList } from './StoragesList';
