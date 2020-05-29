@@ -45,9 +45,6 @@ const createUser = async user => {
 };
 
 const addItem = async (storageId, item, userId) => {
-  console.log('STORAGE: ', storageId);
-  console.log('ITEM: ', item);
-  console.log('USER: ', userId);
   const storageRef = admin
     .firestore()
     .collection('storages')
@@ -59,9 +56,6 @@ const addItem = async (storageId, item, userId) => {
   }
 
   const storage = storageSnapshot.data();
-
-  console.log('STORAGE OWNER: ', storage.owner);
-  console.log('FUCKING OWNS SHIT: ', storage.owner === userId);
 
   if (storage.owner !== userId && !storage.participants.includes(userId))
     throw new functions.https.HttpsError(
