@@ -8,6 +8,8 @@ import SplashScreen from './src/screens/SplashScreen';
 import { useAuthState } from './src/hooks';
 
 import { NotificationsController } from './src/components';
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 const AppWrapper = styled.View`
   flex: 1;
@@ -15,6 +17,11 @@ const AppWrapper = styled.View`
 
 const App = () => {
   const { authInitialized } = useAuthState();
+
+  // const store = useSelector(i => i);
+  // useEffect(() => {
+  //   console.log(store);
+  // }, [store]);
 
   if (!authInitialized) {
     return <SplashScreen />;
