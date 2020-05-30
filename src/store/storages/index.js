@@ -7,6 +7,7 @@ export const TYPES = {
 };
 
 const INITIAL_STATE = {
+  loadedItems: [],
   own: {},
   accessible: {},
 };
@@ -23,7 +24,8 @@ export const storagesReducer = createReducer(INITIAL_STATE, {
   }),
   [ITEMS_TYPES.add]: (state, action) =>
     produce(state, draft => {
-      const { storageId, items } = action.payload;
+      const { items } = action.payload;
+      const { storageId } = action.meta;
       const { own, accessible } = draft;
       const itemsIds = Object.keys(items);
 
@@ -37,5 +39,7 @@ export const storagesReducer = createReducer(INITIAL_STATE, {
       } else {
         storage.items = itemsIds;
       }
+
+      draft.loadedItems.push(storageId);
     }),
 });

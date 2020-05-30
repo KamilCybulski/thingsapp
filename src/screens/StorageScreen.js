@@ -18,7 +18,7 @@ const StorageScreen = ({ route }) => {
   const storage = useSelector(state => state.storages.own[storageId]);
   const { items } = useStorageItems(storageId);
 
-  // console.log('STRAGE: ', storage);
+  console.log('STORAGE: ', storage);
   console.log('ITEMS: ', items);
 
   return (
