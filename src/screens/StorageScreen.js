@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import { useSelector } from 'react-redux';
+import { useStorageItems } from '../hooks';
 
 const StorageScreenContainer = styled.View`
   align-items: center;
@@ -15,8 +16,10 @@ const StorageScreenHeader = styled.Text`
 const StorageScreen = ({ route }) => {
   const { storageId } = route.params;
   const storage = useSelector(state => state.storages.own[storageId]);
+  const { items } = useStorageItems(storageId);
 
-  console.log('PICKED STORAGE: ', storage);
+  // console.log('STRAGE: ', storage);
+  console.log('ITEMS: ', items);
 
   return (
     <StorageScreenContainer>

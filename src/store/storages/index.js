@@ -1,6 +1,8 @@
+import produce from 'immer';
 import { createReducer } from '../common';
+import { TYPES as ITEMS_TYPES } from '../items';
 
-const TYPES = {
+export const TYPES = {
   setOwn: 'storages/SET_OWN',
 };
 
@@ -19,4 +21,21 @@ export const storagesReducer = createReducer(INITIAL_STATE, {
     ...state,
     own: action.payload,
   }),
+  [ITEMS_TYPES.add]: (state, action) =>
+    produce(state, draft => {
+      const { storageId, items } = action.payload;
+      const { own, accessible } = draft;
+      const itemsIds = Object.keys(items);
+
+      const storage = own[storageId] || accessible[storageId];
+      if (!storage) {
+        return;
+      }
+
+      if (storage.items) {
+        storage.items = [...new Set(storage.items.concat(itemsIds))];
+      } else {
+        storage.items = itemsIds;
+      }
+    }),
 });
