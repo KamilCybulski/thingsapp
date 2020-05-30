@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { storageService } from '../services';
 import { setOwnStorages } from '../store/storages';
@@ -11,27 +11,31 @@ import { setOwnStorages } from '../store/storages';
  */
 const useOwnStorages = (options = {}) => {
   const dispatch = useDispatch();
-  const { ownStorages } = useSelector(state => {
-    const { own } = state.storages;
+  const { ownStorages, ownStoragesLoaded, ownStoragesList } = useSelector(
+    state => {
+      const { own } = state.storages;
 
-    return { ownStorages: own.data };
-  });
+      return {
+        ownStorages: own.data,
+        ownStoragesList: Object.values(own.data),
+        ownStoragesLoaded: own.loaded,
+      };
+    },
+  );
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    setIsLoading(true);
-    storageService
-      .getOwnStorages()
-      .then(result => dispatch(setOwnStorages(result)))
-      .catch(err => setError(err))
-      .finally(() => setIsLoading(false));
+    if (!ownStoragesLoaded || options.allowRefetch) {
+      setIsLoading(true);
+      storageService
+        .getOwnStorages()
+        .then(result => dispatch(setOwnStorages(result)))
+        .catch(err => setError(err))
+        .finally(() => setIsLoading(false));
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const ownStoragesList = useMemo(() => Object.values(ownStorages), [
-    ownStorages,
-  ]);
 
   return { ownStorages, ownStoragesList, isLoading, error };
 };
