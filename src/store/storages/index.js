@@ -7,8 +7,15 @@ export const TYPES = {
 };
 
 const INITIAL_STATE = {
-  own: {},
-  accessible: {},
+  loadedItems: [],
+  own: {
+    loaded: false,
+    data: {},
+  },
+  accessible: {
+    loaded: false,
+    data: {},
+  },
 };
 
 export const setOwnStorages = storages => ({
@@ -17,17 +24,19 @@ export const setOwnStorages = storages => ({
 });
 
 export const storagesReducer = createReducer(INITIAL_STATE, {
-  [TYPES.setOwn]: (state, action) => ({
-    ...state,
-    own: action.payload,
-  }),
+  [TYPES.setOwn]: (state, action) =>
+    produce(state, draft => {
+      draft.own.loaded = true;
+      draft.own.data = action.payload;
+    }),
   [ITEMS_TYPES.add]: (state, action) =>
     produce(state, draft => {
-      const { storageId, items } = action.payload;
+      const { items } = action.payload;
+      const { storageId } = action.meta;
       const { own, accessible } = draft;
       const itemsIds = Object.keys(items);
 
-      const storage = own[storageId] || accessible[storageId];
+      const storage = own.data[storageId] || accessible.data[storageId];
       if (!storage) {
         return;
       }
@@ -37,5 +46,7 @@ export const storagesReducer = createReducer(INITIAL_STATE, {
       } else {
         storage.items = itemsIds;
       }
+
+      draft.loadedItems.push(storageId);
     }),
 });
