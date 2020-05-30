@@ -14,7 +14,7 @@ const useStorageItems = (storageId, options = {}) => {
   const dispatch = useDispatch();
   const { items, itemsLoaded } = useSelector(state => {
     const { own, accessible } = state.storages;
-    const storage = own[storageId] || accessible[storageId];
+    const storage = own.data[storageId] || accessible.data[storageId];
     const itemsLoaded = state.storages.loadedItems.includes(storageId);
 
     if (!storage) {

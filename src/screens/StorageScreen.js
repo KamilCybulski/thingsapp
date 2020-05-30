@@ -15,7 +15,7 @@ const StorageScreenHeader = styled.Text`
 
 const StorageScreen = ({ route }) => {
   const { storageId } = route.params;
-  const storage = useSelector(state => state.storages.own[storageId]);
+  const storage = useSelector(state => state.storages.own.data[storageId]);
   const { items } = useStorageItems(storageId);
 
   console.log('STORAGE: ', storage);
