@@ -14,7 +14,7 @@ export const SCREENS = {
   auth: 'Auth',
   home: 'Home',
   storage: 'Storage',
-  newItem: 'newItem',
+  newItem: 'New Item',
 };
 
 const AppScreens = () => {

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
+import NewItemForm from '../components/NewItemForm';
 
 const NewItemScreenContanier = styled.View`
   flex: 1;
@@ -8,13 +9,9 @@ const NewItemScreenContanier = styled.View`
   background-color: #00563f;
 `;
 
-const NewItemScreenText = styled.Text`
-  color: #fff;
-`;
-
 const NewItemScreen = ({ navigation }) => (
   <NewItemScreenContanier>
-    <NewItemScreenText>Welcome to NewItemScreen</NewItemScreenText>
+    <NewItemForm />
   </NewItemScreenContanier>
 );
 
