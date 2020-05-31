@@ -20,19 +20,16 @@ const StorageScreenHeader = styled.Text`
 
 const StorageScreen = ({ route, navigation }) => {
   const { storageId } = route.params;
-  const storage = useSelector(state => state.storages.own.data[storageId]);
-  const { items } = useStorageItems(storageId);
+  // const storage = useSelector(state => state.storages.own.data[storageId]);
+  // const { items } = useStorageItems(storageId);
 
   const handleAddItemPress = useCallback(() => {
-    navigation.navigate(SCREENS.addThing);
+    navigation.navigate(SCREENS.newItem);
   }, [navigation]);
-
-  console.log('STORAGE: ', storage);
-  console.log('ITEMS: ', items);
 
   return (
     <StorageScreenContainer>
-      <StorageScreenHeader>This is {storage.name} storage</StorageScreenHeader>
+      <StorageScreenHeader>This is my storage</StorageScreenHeader>
       <IconButton onPress={handleAddItemPress}>
         <AddIcon width={30} height={30} fill="#fff" />
       </IconButton>
