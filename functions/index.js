@@ -63,7 +63,9 @@ const addItem = async (storageId, item, userId) => {
       'Does not have required permissions',
     );
 
-  return storageRef.collection('items').add(item);
+  const itemReference = await storageRef.collection('items').add(item);
+  const result = await itemReference.get();
+  return result.data();
 };
 
 exports.createUser = functions.auth.user().onCreate(createUser);
