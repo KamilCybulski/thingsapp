@@ -21,7 +21,7 @@ export const useNewItemFormHandler = storageId => {
         dispatch(addItems(result, storageId));
         navigation.navigate(SCREENS.storage, { storageId });
       } catch (err) {
-        setError(err);
+        setError(err.message ? err.message : err);
       } finally {
         setIsLoading(false);
       }

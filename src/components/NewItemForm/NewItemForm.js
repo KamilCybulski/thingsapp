@@ -9,6 +9,7 @@ import Input from '../Input';
 import { useNewItemFormHandler } from './hooks';
 
 const NewItemFormContainer = styled.View`
+  position: relative;
   flex: 1;
   justify-content: center;
   align-items: center;
@@ -18,6 +19,17 @@ const NewItemFormHeader = styled.Text`
   color: #fff;
   font-size: 40px;
   line-height: 48px;
+`;
+
+// TODO replace this with actual loader and error
+const LoadingText = styled.Text`
+  color: #fff;
+  font-size: 24px;
+`;
+
+const ErrorText = styled.Text`
+  color: #f00;
+  font-size: 24px;
 `;
 
 const initialValues = {
@@ -36,11 +48,12 @@ const validationSchema = yup.object().shape({
 });
 
 const NewItemForm = ({ storageId }) => {
-  const { handleSubmit } = useNewItemFormHandler(storageId);
+  const { isLoading, error, handleSubmit } = useNewItemFormHandler(storageId);
 
   return (
     <NewItemFormContainer>
       <NewItemFormHeader>Add new item</NewItemFormHeader>
+      {isLoading && <LoadingText>Loading...</LoadingText>}
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -76,6 +89,7 @@ const NewItemForm = ({ storageId }) => {
                 returnKeyType="done"
               />
             </Wrapper>
+            {error && <ErrorText>{error}</ErrorText>}
             <Wrapper mb="10px">
               <Button onPress={handleSubmit}>Send</Button>
             </Wrapper>
