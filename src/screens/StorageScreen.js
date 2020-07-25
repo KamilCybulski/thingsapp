@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
-// import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import AddIcon from '../assets/icons/add--white.svg';
 // import { useStorageItems } from '../hooks';
@@ -12,15 +12,16 @@ const StorageScreenContainer = styled.View`
   align-items: center;
   flex: 1;
   justify-content: center;
+  background-color: #00563f;
 `;
 
 const StorageScreenHeader = styled.Text`
-  color: #000;
+  color: #fff;
 `;
 
 const StorageScreen = ({ route, navigation }) => {
   const { storageId } = route.params;
-  // const storage = useSelector(state => state.storages.own.data[storageId]);
+  const storage = useSelector(state => state.storages.own.data[storageId]);
   // const { items } = useStorageItems(storageId);
 
   const handleAddItemPress = useCallback(() => {
@@ -29,7 +30,7 @@ const StorageScreen = ({ route, navigation }) => {
 
   return (
     <StorageScreenContainer>
-      <StorageScreenHeader>This is my storage</StorageScreenHeader>
+      <StorageScreenHeader>{storage.name}</StorageScreenHeader>
       <IconButton onPress={handleAddItemPress}>
         <AddIcon width={30} height={30} fill="#fff" />
       </IconButton>

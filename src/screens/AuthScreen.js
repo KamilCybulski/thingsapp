@@ -2,7 +2,6 @@ import React, { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { usePhoneAuth } from '../hooks';
-import { SCREENS } from '.';
 import { AuthConfirmationForm, PhoneNumberForm } from '../components';
 import { addErrorNotification } from '../store/notifications';
 
