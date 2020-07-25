@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import styled from 'styled-components/native';
 import * as yup from 'yup';
 import { Formik } from 'formik';
@@ -6,7 +6,7 @@ import { Formik } from 'formik';
 import Wrapper from '../Wrapper';
 import Button from '../Button';
 import Input from '../Input';
-import { itemsService } from '../../services';
+import { useNewItemFormHandler } from './hooks';
 
 const NewItemFormContainer = styled.View`
   flex: 1;
@@ -36,14 +36,7 @@ const validationSchema = yup.object().shape({
 });
 
 const NewItemForm = ({ storageId }) => {
-  const handleNewItemSubmit = useCallback(async values => {
-    try {
-      const result = await itemsService.addItem(storageId, values);
-      console.log('ADD ITEMS SUCCESS: ', result);
-    } catch (error) {
-      console.log('ADD ITEM ERROR: ', error);
-    }
-  }, []);
+  const { handleSubmit } = useNewItemFormHandler(storageId);
 
   return (
     <NewItemFormContainer>
@@ -51,7 +44,7 @@ const NewItemForm = ({ storageId }) => {
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={handleNewItemSubmit}
+        onSubmit={handleSubmit}
       >
         {({
           handleSubmit,
