@@ -4,7 +4,7 @@ import { FlatList, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import { SCREENS } from '../../screens';
-import { useOwnStorages } from '../../hooks';
+import { useStorages } from '../../hooks';
 
 const ItemText = styled.Text`
   color: #000;
@@ -26,7 +26,7 @@ const Item = ({ onPress, children }) => (
 
 const StoragesList = () => {
   const navigation = useNavigation();
-  const { ownStoragesList, isLoading } = useOwnStorages();
+  const { storagesList, isLoading } = useStorages();
 
   const handleItemPress = useCallback(
     storageId => () => {
@@ -39,7 +39,7 @@ const StoragesList = () => {
     return null;
   }
 
-  if (ownStoragesList?.length <= 0) {
+  if (storagesList?.length <= 0) {
     return (
       <Text>Hey, looks like you don't have any storages yet. Add one!</Text>
     );
@@ -47,7 +47,7 @@ const StoragesList = () => {
 
   return (
     <FlatList
-      data={ownStoragesList}
+      data={storagesList}
       renderItem={({ item }) => (
         <Item key={item.id} onPress={handleItemPress(item.id)}>
           - {item.name}
