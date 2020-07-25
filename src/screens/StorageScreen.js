@@ -3,8 +3,7 @@ import styled from 'styled-components/native';
 import { useSelector } from 'react-redux';
 
 import AddIcon from '../assets/icons/add--white.svg';
-// import { useStorageItems } from '../hooks';
-import { IconButton } from '../components';
+import { IconButton, ItemsList } from '../components';
 import { useCallback } from 'react';
 import { SCREENS } from '.';
 
@@ -22,7 +21,6 @@ const StorageScreenHeader = styled.Text`
 const StorageScreen = ({ route, navigation }) => {
   const { storageId } = route.params;
   const storage = useSelector(state => state.storages.own.data[storageId]);
-  // const { items } = useStorageItems(storageId);
 
   const handleAddItemPress = useCallback(() => {
     navigation.navigate(SCREENS.newItem, { storageId });
@@ -31,6 +29,7 @@ const StorageScreen = ({ route, navigation }) => {
   return (
     <StorageScreenContainer>
       <StorageScreenHeader>{storage.name}</StorageScreenHeader>
+      <ItemsList storageId={storageId} />
       <IconButton onPress={handleAddItemPress}>
         <AddIcon width={30} height={30} fill="#fff" />
       </IconButton>
