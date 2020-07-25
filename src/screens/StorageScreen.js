@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 
 import AddIcon from '../assets/icons/add--white.svg';
-import { useStorageItems } from '../hooks';
+// import { useStorageItems } from '../hooks';
 import { IconButton } from '../components';
 import { useCallback } from 'react';
 import { SCREENS } from '.';
@@ -24,8 +24,8 @@ const StorageScreen = ({ route, navigation }) => {
   // const { items } = useStorageItems(storageId);
 
   const handleAddItemPress = useCallback(() => {
-    navigation.navigate(SCREENS.newItem);
-  }, [navigation]);
+    navigation.navigate(SCREENS.newItem, { storageId });
+  }, [navigation, storageId]);
 
   return (
     <StorageScreenContainer>

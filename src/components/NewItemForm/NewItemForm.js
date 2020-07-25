@@ -6,6 +6,7 @@ import { Formik } from 'formik';
 import Wrapper from '../Wrapper';
 import Button from '../Button';
 import Input from '../Input';
+import { itemsService } from '../../services';
 
 const NewItemFormContainer = styled.View`
   flex: 1;
@@ -21,7 +22,7 @@ const NewItemFormHeader = styled.Text`
 
 const initialValues = {
   name: '',
-  quantity: 1,
+  quantity: '1',
   date: new Date(),
 };
 
@@ -34,9 +35,14 @@ const validationSchema = yup.object().shape({
   date: yup.date().required('This field is required'),
 });
 
-const NewItemForm = () => {
-  const handleNewItemSubmit = useCallback(values => {
-    console.log(values);
+const NewItemForm = ({ storageId }) => {
+  const handleNewItemSubmit = useCallback(async values => {
+    try {
+      const result = await itemsService.addItem(storageId, values);
+      console.log('ADD ITEMS SUCCESS: ', result);
+    } catch (error) {
+      console.log('ADD ITEM ERROR: ', error);
+    }
   }, []);
 
   return (
@@ -66,7 +72,7 @@ const NewItemForm = () => {
                 autoCompleteType="off"
                 returnKeyType="done"
               />
-              {/* <Input
+              <Input
                 value={values.quantity}
                 onChangeText={handleChange('quantity')}
                 onBlur={handleBlur('quantity')}
@@ -75,7 +81,7 @@ const NewItemForm = () => {
                 autoCompleteType="off"
                 keyboardType="number-pad"
                 returnKeyType="done"
-              /> */}
+              />
             </Wrapper>
             <Wrapper mb="10px">
               <Button onPress={handleSubmit}>Send</Button>

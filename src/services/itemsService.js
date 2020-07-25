@@ -1,4 +1,5 @@
 import firestore from '@react-native-firebase/firestore';
+import functions from '@react-native-firebase/functions';
 
 const itemsService = {
   getItemsFromStorage(storageId) {
@@ -14,6 +15,10 @@ const itemsService = {
         });
         return result;
       });
+  },
+
+  addItem(storageId, item) {
+    return functions().httpsCallable('addItem')({ storageId, item });
   },
 };
 

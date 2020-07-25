@@ -9,9 +9,9 @@ const NewItemScreenContanier = styled.View`
   background-color: #00563f;
 `;
 
-const NewItemScreen = ({ navigation }) => (
+const NewItemScreen = ({ navigation, route }) => (
   <NewItemScreenContanier>
-    <NewItemForm />
+    <NewItemForm storageId={route.params.storageId} />
   </NewItemScreenContanier>
 );
 
