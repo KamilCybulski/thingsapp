@@ -3,6 +3,8 @@ import styled from 'styled-components/native';
 
 import Gradient from '../Gradient';
 
+// FIXME should not have position:absolute and positioning styles
+// This should be possible to set from the parent
 const ButtonWrapper = styled.View`
   border-radius: 50px;
   bottom: 20px;

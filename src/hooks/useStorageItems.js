@@ -40,10 +40,11 @@ const useStorageItems = (storageId, options = {}) => {
       itemsService
         .getItemsFromStorage(storageId)
         .then(result => dispatch(addItems(result, storageId)))
-        .catch(err => setError(err));
+        .catch(err => setError(err))
+        .finally(() => setIsLoading(false));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [storageId]);
 
   return { items, error, isLoading };
 };

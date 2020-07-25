@@ -6,7 +6,7 @@ import { setOwnStorages } from '../store/storages';
 /**
  *
  * @param {object} options Hook options
- * @param {boolean} options.allowRefetch If set tu true, will refetch data on component mount, even
+ * @param {boolean} options.allowRefetch If set to true, will refetch data on component mount, even
  * if the data was loaded before.
  */
 const useOwnStorages = (options = {}) => {
