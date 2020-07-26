@@ -6,7 +6,6 @@ admin.initializeApp();
 const createStorage = async (storageName, userId) => {
   const newStorageData = {
     owner: userId,
-    participants: [],
     name: storageName,
   };
 
@@ -19,10 +18,7 @@ const createStorage = async (storageName, userId) => {
     .firestore()
     .collection('users')
     .doc(userId)
-    .update(
-      'ownStorages',
-      admin.firestore.FieldValue.arrayUnion(storageRef.id),
-    );
+    .update('storages', admin.firestore.FieldValue.arrayUnion(storageRef.id));
 
   const result = await storageRef.get();
   return result.data();
@@ -37,8 +33,7 @@ const createUser = async user => {
     .doc(uid)
     .set({
       phoneNumber,
-      ownStorages: [],
-      accessibleStorages: [],
+      storages: [],
     });
 
   await createStorage('My storage', uid);
@@ -57,7 +52,7 @@ const addItem = async (storageId, item, userId) => {
 
   const storage = storageSnapshot.data();
 
-  if (storage.owner !== userId && !storage.participants.includes(userId))
+  if (storage.owner !== userId)
     throw new functions.https.HttpsError(
       'unauthenticated',
       'Does not have required permissions',
