@@ -1,13 +1,7 @@
-import firestore from '@react-native-firebase/firestore';
+import functions from '@react-native-firebase/functions';
 
 const userService = {
-  getUser(id) {
-    return firestore()
-      .collection('users')
-      .doc(id)
-      .get()
-      .then(document => document.data());
-  },
+  getUser: id => functions().httpsCallable('getUser')(id),
 };
 
 export default userService;
