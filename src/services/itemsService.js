@@ -1,25 +1,11 @@
-import firestore from '@react-native-firebase/firestore';
 import functions from '@react-native-firebase/functions';
 
 const itemsService = {
-  getItemsFromStorage(storageId) {
-    return firestore()
-      .collection('storages')
-      .doc(storageId)
-      .collection('items')
-      .get()
-      .then(querySnapshot => {
-        let result = {};
-        querySnapshot.forEach(doc => {
-          result[doc.id] = { ...doc.data(), id: doc.id };
-        });
-        return result;
-      });
-  },
+  getItemsFromStorage: storageId =>
+    functions().httpsCallable('getStorageItems')(storageId),
 
-  addItem(storageId, item) {
-    return functions().httpsCallable('addItem')({ storageId, item });
-  },
+  addItem: (storageId, item) =>
+    functions().httpsCallable('addItem')({ storageId, item }),
 };
 
 export default itemsService;

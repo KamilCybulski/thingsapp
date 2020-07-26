@@ -1,22 +1,7 @@
-import firestore from '@react-native-firebase/firestore';
-import auth from '@react-native-firebase/auth';
+import functions from '@react-native-firebase/functions';
 
 const storageService = {
-  async getOwnStorages() {
-    const { uid } = auth().currentUser;
-
-    return firestore()
-      .collection('storages')
-      .where('owner', '==', uid)
-      .get()
-      .then(querySnapshot => {
-        let result = {};
-        querySnapshot.forEach(doc => {
-          result[doc.id] = { ...doc.data(), id: doc.id };
-        });
-        return result;
-      });
-  },
+  getOwnStorages: () => functions().httpsCallable('getStorages')(),
 };
 
 export default storageService;
