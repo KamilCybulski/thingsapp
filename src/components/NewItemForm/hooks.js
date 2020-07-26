@@ -18,6 +18,7 @@ export const useNewItemFormHandler = storageId => {
 
       try {
         const result = await itemsService.addItem(storageId, values);
+        console.log('RESULT: ', result);
         dispatch(addItems(result, storageId));
         navigation.navigate(SCREENS.storage, { storageId });
       } catch (err) {

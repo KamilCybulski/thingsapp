@@ -3,40 +3,31 @@ import { createReducer } from '../common';
 import { TYPES as ITEMS_TYPES } from '../items';
 
 export const TYPES = {
-  setOwn: 'storages/SET_OWN',
+  set: 'storages/SET',
 };
 
 const INITIAL_STATE = {
   loadedItems: [],
-  own: {
-    loaded: false,
-    data: {},
-  },
-  accessible: {
-    loaded: false,
-    data: {},
-  },
+  data: {},
 };
 
-export const setOwnStorages = storages => ({
-  type: TYPES.setOwn,
+export const setStorages = storages => ({
+  type: TYPES.set,
   payload: storages,
 });
 
 export const storagesReducer = createReducer(INITIAL_STATE, {
-  [TYPES.setOwn]: (state, action) =>
+  [TYPES.set]: (state, action) =>
     produce(state, draft => {
-      draft.own.loaded = true;
-      draft.own.data = action.payload;
+      draft.data = action.payload;
     }),
   [ITEMS_TYPES.add]: (state, action) =>
     produce(state, draft => {
       const { items } = action.payload;
       const { storageId } = action.meta;
-      const { own, accessible } = draft;
       const itemsIds = Object.keys(items);
 
-      const storage = own.data[storageId] || accessible.data[storageId];
+      const storage = draft.data[storageId];
       if (!storage) {
         return;
       }

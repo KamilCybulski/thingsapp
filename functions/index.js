@@ -65,7 +65,7 @@ const addItem = async (storageId, item, userId) => {
 
   const itemReference = await storageRef.collection('items').add(item);
   const result = await itemReference.get();
-  return result.data();
+  return { id: itemReference.id, ...result.data() };
 };
 
 exports.createUser = functions.auth.user().onCreate(createUser);

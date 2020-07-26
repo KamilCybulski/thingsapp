@@ -20,7 +20,7 @@ const StorageScreenHeader = styled.Text`
 
 const StorageScreen = ({ route, navigation }) => {
   const { storageId } = route.params;
-  const storage = useSelector(state => state.storages.own.data[storageId]);
+  const storage = useSelector(state => state.storages.data[storageId]);
 
   const handleAddItemPress = useCallback(() => {
     navigation.navigate(SCREENS.newItem, { storageId });

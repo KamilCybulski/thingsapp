@@ -12,7 +12,7 @@ const ItemText = styled.Text`
 `;
 
 const ItemContainer = styled.View`
-  width: 200px;
+  width: 300px;
   height: 50px;
 `;
 
@@ -24,8 +24,6 @@ const Item = ({ children }) => (
 
 const StoragesList = ({ storageId }) => {
   const { isLoading, items } = useStorageItems(storageId);
-
-  console.log({ isLoading, items });
 
   if (isLoading) {
     return null;
