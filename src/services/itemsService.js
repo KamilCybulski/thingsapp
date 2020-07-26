@@ -1,8 +1,12 @@
 import functions from '@react-native-firebase/functions';
 
 const itemsService = {
-  getItemsFromStorage: storageId =>
-    functions().httpsCallable('getStorageItems')(storageId),
+  getItemsFromStorage: async storageId => {
+    const result = await functions().httpsCallable('getStorageItems')(
+      storageId,
+    );
+    return result.data;
+  },
 
   addItem: (storageId, item) =>
     functions().httpsCallable('addItem')({ storageId, item }),
